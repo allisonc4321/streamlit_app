@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
-import io
 
 web_apps = st.sidebar.selectbox("Select Web Apps",
                                 ("Exploratory Data Analysis", "Distributions"))
@@ -71,7 +70,7 @@ if web_apps == "Exploratory Data Analysis":
       choose_opacity = st.slider(
           'Color Opacity', min_value=0.0, max_value=1.0, step=0.05, value=1.0)
 
-      bar_title = st.text_input('Set Title', 'Histogram')
+      bar_title = st.text_input('Set Title', 'Bar Plot')
       bar_xtitle = st.text_input('Set x-axis Title', categorical_column)
 
       counts = df[categorical_column].value_counts()
