@@ -3,7 +3,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 web_apps = st.sidebar.selectbox("Select Web Apps",
-                                ("Exploratory Data Analysis", "Distributions"))
+                                ("Exploratory Data Analysis",))
 
 
 if web_apps == "Exploratory Data Analysis":
@@ -25,11 +25,14 @@ if web_apps == "Exploratory Data Analysis":
       st.write(df)
 
     column_type = st.sidebar.selectbox('Select Data Type',
-                                       ("Numerical", "Categorical", "Bool", "Date"))
+                                       ("Numerical", "Categorical",))
 
     if column_type == "Numerical":
       numerical_column = st.sidebar.selectbox(
           'Select a Column', df.select_dtypes(include=['int64', 'float64']).columns)
+      
+      # five number summary
+      st.write(df[numerical_column].describe().iloc[3:])
 
       # histogram
       choose_color = st.color_picker('Pick a Color', "#69b3a2")
@@ -74,6 +77,10 @@ if web_apps == "Exploratory Data Analysis":
       bar_xtitle = st.text_input('Set x-axis Title', categorical_column)
 
       counts = df[categorical_column].value_counts()
+      counts1 = pd.DataFrame(counts)
+      counts1['Proportion'] = counts / counts.sum()
+
+      st.write(counts1)
 
       fig, ax = plt.subplots()
       ax.bar(counts.index, height=counts,
