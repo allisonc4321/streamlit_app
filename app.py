@@ -74,7 +74,6 @@ if web_apps == "Exploratory Data Analysis":
       bar_xtitle = st.text_input('Set x-axis Title', categorical_column)
 
       counts = df[categorical_column].value_counts()
-      st.write(counts)
 
       fig, ax = plt.subplots()
       ax.bar(counts.index, height=counts,
